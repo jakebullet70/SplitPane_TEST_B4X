@@ -17,11 +17,12 @@ FileGroup7=Default Group
 Group=Default Group
 Library1=jcore
 Library2=jfx
-Module1=test1
-Module2=test2
+Module1=test03
+Module2=test1
+Module3=test2
 NumberOfFiles=7
 NumberOfLibraries=2
-NumberOfModules=2
+NumberOfModules=3
 Version=10
 @EndOfDesignText@
 #Region  Project Attributes 
