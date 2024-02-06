@@ -1,5 +1,5 @@
 ﻿B4J=true
-Group=Default Group
+Group=test files
 ModulesStructureVersion=1
 Type=Class
 Version=10

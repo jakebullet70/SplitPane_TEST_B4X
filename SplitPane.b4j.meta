@@ -1,6 +1,12 @@
 ﻿ModuleBookmarks0=
+ModuleBookmarks1=
+ModuleBookmarks2=
 ModuleBreakpoints0=
+ModuleBreakpoints1=
+ModuleBreakpoints2=
 ModuleClosedNodes0=
-NavigationStack=Main,AppStart,20,0,Main,lstSites_SelectedIndexChanged,42,0,Main,Process_Globals,6,0,test03,Class_Globals,0,0
+ModuleClosedNodes1=
+ModuleClosedNodes2=
+NavigationStack=Main,lstSites_SelectedIndexChanged,42,0,Main,AppStart,18,0,Main,Process_Globals,6,0,test1,Class_Globals,0,0,testMod2,Process_Globals,4,0
 SelectedBuild=0
-VisibleModules=
+VisibleModules=1,2
