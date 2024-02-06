@@ -18,10 +18,11 @@ Group=Default Group
 Library1=jcore
 Library2=jfx
 Module1=test1
-Module2=testMod2
+Module2=testgroup3file
+Module3=testMod2
 NumberOfFiles=7
 NumberOfLibraries=2
-NumberOfModules=2
+NumberOfModules=3
 Version=10
 @EndOfDesignText@
 #Region  Project Attributes 
