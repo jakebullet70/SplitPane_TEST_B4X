@@ -1,0 +1,100 @@
+﻿AppType=JavaFX
+Build1=Default,b4j.example
+File1=Center.bjl
+File2=LeftSide.bjl
+File3=Main.bjl
+File4=RightFavorites.bjl
+File5=RightHistory.bjl
+File6=RightSide.bjl
+File7=sites.txt
+FileGroup1=Default Group
+FileGroup2=Default Group
+FileGroup3=Default Group
+FileGroup4=Default Group
+FileGroup5=Default Group
+FileGroup6=Default Group
+FileGroup7=Default Group
+Group=Default Group
+Library1=jcore
+Library2=jfx
+NumberOfFiles=7
+NumberOfLibraries=2
+NumberOfModules=0
+Version=10
+@EndOfDesignText@
+#Region  Project Attributes 
+	#MainFormWidth: 800
+	#MainFormHeight: 600 
+#End Region
+
+Sub Process_Globals
+	Private fx As JFX
+	Private MainForm As Form
+	Private splitMain As SplitPane
+	Private lstSites As ListView
+	Private WebView1 As WebView
+	Private txtUrl As TextField
+	Private lstHistory As ListView
+	Private lstFavorites As ListView
+	Private splitRight As SplitPane
+End Sub
+
+Sub AppStart (Form1 As Form, Args() As String)
+	MainForm = Form1
+	MainForm.SetFormStyle("UNIFIED")
+	MainForm.RootPane.LoadLayout("Main")
+	splitMain.LoadLayout("LeftSide") 
+	splitMain.LoadLayout("Center")
+	splitMain.LoadLayout("RightSide")
+	'limit the widths of the two side layouts
+	splitMain.SetSizeLimits(0, 0, 200)
+	splitMain.SetSizeLimits(2, 0, 300)
+	CreateRightSizeLayout
+	lstSites.Items.AddAll(File.ReadList(File.DirAssets, "sites.txt"))
+	MainForm.Show
+	lstSites.SelectedIndex = 0
+End Sub
+
+Private Sub CreateRightSizeLayout
+	splitRight.LoadLayout("RightHistory")
+	splitRight.LoadLayout("RightFavorites")
+	lstFavorites.Items.Add("http://www.b4x.com")
+End Sub
+
+Sub lstSites_SelectedIndexChanged(Index As Int)
+	If Index = -1 Then Return
+	txtUrl.Text = $"http://www.${lstSites.Items.Get(Index)}"$
+	btnGo_Action
+End Sub
+
+Sub txtUrl_Action
+	btnGo_Action
+End Sub
+
+Sub btnGo_Action
+	txtUrl.Text = txtUrl.Text.Trim
+	If txtUrl.Text.Length = 0 Then Return
+	If txtUrl.Text.StartsWith("http") = False Then txtUrl.Text = "http://" & txtUrl.Text
+	Dim currentIndex As Int = lstHistory.Items.IndexOf(txtUrl.Text)
+	If currentIndex > -1 Then lstHistory.Items.RemoveAt(currentIndex)
+	lstHistory.Items.InsertAt(0, txtUrl.Text)
+	WebView1.LoadUrl(txtUrl.Text)
+End Sub
+
+Sub WebView1_PageFinished (Url As String)
+	txtUrl.Text = Url
+End Sub
+
+Sub lstHistory_SelectedIndexChanged(Index As Int)
+	If Index = -1 Then Return
+	txtUrl.Text = lstHistory.Items.Get(Index)
+	lstHistory.SelectedIndex = -1
+	btnGo_Action
+End Sub
+
+Sub lstFavorites_SelectedIndexChanged(Index As Int)
+	If Index = -1 Then Return
+	lstFavorites.SelectedIndex = -1
+	txtUrl.Text = lstFavorites.Items.Get(Index)
+	btnGo_Action
+End Sub
